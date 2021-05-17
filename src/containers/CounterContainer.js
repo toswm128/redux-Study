@@ -6,7 +6,7 @@ import * as counterActions from "../store/modules/counter";
 class CounterContainer extends Component {
   handleIncrement = () => {
     this.props.increment();
-    console.log(this.props);
+    console.log(this);
   };
 
   handleDecrement = () => {
@@ -14,7 +14,7 @@ class CounterContainer extends Component {
   };
 
   handleTest = () => {
-    this.props.test();
+    this.props.test("a");
   };
 
   render() {
@@ -33,6 +33,7 @@ class CounterContainer extends Component {
     );
   }
 }
+document.querySelector("#nx_query");
 
 // props 값으로 넣어 줄 상태를 정의해줍니다.
 const mapStateToProps = state => (

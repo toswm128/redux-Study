@@ -14,7 +14,7 @@ export const test = () => ({ type: TEST });
 // 모듈의 초기 상태를 정의합니다.
 const initialState = {
   number: 0,
-  testS: "null",
+  testS: 10,
 };
 
 // handleActions 의 첫번째 파라미터는 액션을 처리하는 함수들로 이뤄진 객체이고
@@ -28,9 +28,8 @@ export default handleActions(
     // state 부분에서 비구조화 할당도 해주어서 코드를 더욱 간소화시켰습니다.
     [DECREMENT]: ({ number }) => ({ number: number - 1 }),
 
-    [TEST]: (state, action) => {
-      console.log(state, action);
-      return { testS: "hi" };
+    [TEST]: ({ testS }) => {
+      return { testS: testS + 1 };
     },
   },
   initialState
