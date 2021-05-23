@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
-const Todo = () => {
+const Todo = props => {
+  console.log(props.toDos);
   const [text, setText] = useState("");
   const onChange = e => {
     setText(e.target.value);
@@ -17,4 +19,8 @@ const Todo = () => {
   );
 };
 
-export default Todo;
+const mapStateToProps = state => {
+  return { toDos: state };
+};
+
+export default connect(mapStateToProps)(Todo);
