@@ -19,17 +19,67 @@ const deleteToDo = id => {
   };
 };
 
+const USERADD = "USERADD";
+const USERCHECK = "USERCHECK";
+
+//action creater
+const userAdd = (userId, userPwd, userName) => {
+  return {
+    type: USERADD,
+    userId,
+    userPwd,
+    userName,
+  };
+};
+
+const userCheck = (userId, userPwd) => {
+  return {
+    type: USERCHECK,
+    userId,
+    userPwd,
+  };
+};
+
 //reducer
-const reducer = (state = [], action) => {
+const reducer = (state = { todo: [], user: [] }, action) => {
   switch (action.type) {
     case ADD:
-      return [...state, { text: action.text, id: Date.now() }];
+      return {
+        todo: [...state.todo, { text: action.text, id: Date.now() }],
+        user: [...state.user],
+      };
     case DELETE:
-      return state.filter(toDo => toDo.id !== action.id);
+      return {
+        todo: state.todo.filter(toDo => toDo.id !== action.id),
+        user: [...state.user],
+      };
+    case USERADD:
+      return {
+        todo: [...state.todo],
+        user: [
+          ...state.user,
+          {
+            userId: action.userId,
+            userPwd: action.userPwd,
+            userName: action.userName,
+          },
+        ],
+      };
     default:
       return state;
   }
 };
+
+// const Authreduser = (State = [], action) => {
+//   console.log(action);
+//   switch (action.type) {
+//     case USERCHECK:
+//       return [...State, { a: action.userId, b: action.userPwd }];
+
+//     default:
+//       break;
+//   }
+// };
 
 //store
 const store = createStore(reducer);
@@ -37,5 +87,7 @@ const store = createStore(reducer);
 export const actionCreater = {
   addToDo,
   deleteToDo,
+  userAdd,
+  userCheck,
 };
 export default store;

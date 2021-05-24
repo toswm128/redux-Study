@@ -26,7 +26,7 @@ const Todo = ({ toDos, addToDo }) => {
 };
 
 const mapStateToProps = state => {
-  return { toDos: state };
+  return { toDos: state.todo };
 };
 
 const mapDispatchToProps = dispatch => {
