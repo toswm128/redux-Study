@@ -41,7 +41,7 @@ const userCheck = (userId, userPwd) => {
 };
 
 //reducer
-const reducer = (state = { todo: [], user: [] }, action) => {
+const reducer = (state = { todo: [], user: [], userInfo: {} }, action) => {
   switch (action.type) {
     case ADD:
       return {
@@ -64,17 +64,35 @@ const reducer = (state = { todo: [], user: [] }, action) => {
             userName: action.userName,
           },
         ],
+        userInfo: {
+          userId: state.userInfo.userId,
+          userName: state.userInfo.username,
+        },
       };
 
     case USERCHECK:
-      return state.user.map(current => {
-        if (
-          current.userId === action.userId &&
-          current.userPwd === action.userPwd
-        ) {
-          console.log("로그인 성공");
-        }
-      });
+      let key;
+      try {
+        state.user.map((current, index) => {
+          if (
+            current.userId === action.userId &&
+            current.userPwd === action.userPwd
+          ) {
+            key = index;
+            console.log("로그인 성공");
+          }
+        });
+        return {
+          todo: [...state.todo],
+          user: [...state.user],
+          userInfo: {
+            userId: state.user[key].userId,
+            userName: state.user[key].userName,
+          },
+        };
+      } catch (error) {
+        console.log("로그인 실패");
+      }
     default:
       return state;
   }

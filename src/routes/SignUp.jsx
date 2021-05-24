@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { actionCreater } from "../AuthStore.js";
+import { useHistory } from "react-router-dom";
 
 const SignUp = ({ userAdd }) => {
   const [userId, setUserId] = useState("");
   const [userPwd, setUserPwd] = useState("");
   const [userName, setUserName] = useState("");
+  const history = useHistory();
   return (
     <div>
       <div>회원가입</div>
@@ -34,6 +36,7 @@ const SignUp = ({ userAdd }) => {
           onClick={() => {
             userAdd(userId, userPwd, userName);
             console.log("회원가입 성공");
+            history.push("/");
           }}
         >
           회원가입

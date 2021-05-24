@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { actionCreater } from "../AuthStore";
+import { useHistory } from "react-router-dom";
 
-const Login = ({ userCheck }) => {
+const Login = ({ user, userCheck }) => {
   const [userId, setUserId] = useState("");
   const [userPwd, setUserPwd] = useState("");
+  const history = useHistory();
+  console.log(user);
   return (
     <div>
       <div>로그인</div>
@@ -25,7 +28,14 @@ const Login = ({ userCheck }) => {
         />
       </div>
       <div>
-        <button onClick={() => userCheck(userId, userPwd)}>로그인</button>
+        <button
+          onClick={() => {
+            userCheck(userId, userPwd);
+            console.log(user);
+          }}
+        >
+          로그인
+        </button>
       </div>
     </div>
   );
@@ -33,7 +43,7 @@ const Login = ({ userCheck }) => {
 
 const mapStateToProps = State => {
   return {
-    user: State.user,
+    user: State,
   };
 };
 
