@@ -65,6 +65,16 @@ const reducer = (state = { todo: [], user: [] }, action) => {
           },
         ],
       };
+
+    case USERCHECK:
+      return state.user.map(current => {
+        if (
+          current.userId === action.userId &&
+          current.userPwd === action.userPwd
+        ) {
+          console.log("로그인 성공");
+        }
+      });
     default:
       return state;
   }
