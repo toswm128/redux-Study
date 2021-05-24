@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { actionCreater } from "../store";
+import ToDoConponent from "../Components/ToDoComponent";
 
 const Todo = ({ toDos, addToDo }) => {
-  console.log(toDos);
   const [text, setText] = useState("");
   const onChange = e => {
     setText(e.target.value);
   };
   const onSubmit = () => {
-    console.log(text);
     addToDo(text);
     setText("");
   };
@@ -19,7 +18,7 @@ const Todo = ({ toDos, addToDo }) => {
       <button onClick={onSubmit}>제출</button>
       <ul>
         {toDos.map(current => {
-          return <div key={current.id}>{current.text} </div>;
+          return <ToDoConponent key={current.id} {...current} />;
         })}
       </ul>
     </div>
@@ -30,8 +29,7 @@ const mapStateToProps = state => {
   return { toDos: state };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log(dispatch, ownProps);
+const mapDispatchToProps = dispatch => {
   return {
     addToDo: text => dispatch(actionCreater.addToDo(text)),
   };
