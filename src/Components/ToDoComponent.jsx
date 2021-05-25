@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { actionCreater } from "../store";
 
 const ToDoComponent = ({ text, onBtnClick, name }) => {
+  console.log(onBtnClick);
   return (
     <li>
       <span>{text} </span>
@@ -16,6 +17,7 @@ const ToDoComponent = ({ text, onBtnClick, name }) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
   return {
     onBtnClick: () => dispatch(actionCreater.deleteToDo(ownProps.id)),
   };

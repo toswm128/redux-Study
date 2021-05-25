@@ -19,13 +19,7 @@ const Todo = ({ toDos, addToDo, state }) => {
       <button onClick={onSubmit}>제출</button>
       <ul>
         {toDos.map(current => {
-          return (
-            <ToDoConponent
-              key={current.id}
-              text={current.text}
-              name={current.name}
-            />
-          );
+          return <ToDoConponent key={current.id} {...current} />;
         })}
       </ul>
     </div>
