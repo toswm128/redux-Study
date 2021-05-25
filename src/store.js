@@ -41,17 +41,32 @@ const userCheck = (userId, userPwd) => {
 };
 
 //reducer
-const reducer = (state = { todo: [], user: [], userInfo: {} }, action) => {
+const reducer = (
+  state = { todo: [], user: [], userInfo: { userName: "익명" } },
+  action
+) => {
   switch (action.type) {
     case ADD:
       return {
-        todo: [...state.todo, { text: action.text, id: Date.now() }],
+        todo: [
+          ...state.todo,
+          { text: action.text, id: Date.now(), name: state.userInfo.userName },
+        ],
         user: [...state.user],
+        userInfo: {
+          userId: state.userInfo.userId,
+          userName: state.userInfo.userName,
+        },
       };
     case DELETE:
       return {
         todo: state.todo.filter(toDo => toDo.id !== action.id),
         user: [...state.user],
+
+        userInfo: {
+          userId: state.userInfo.userId,
+          userName: state.userInfo.userName,
+        },
       };
     case USERADD:
       return {
@@ -66,7 +81,7 @@ const reducer = (state = { todo: [], user: [], userInfo: {} }, action) => {
         ],
         userInfo: {
           userId: state.userInfo.userId,
-          userName: state.userInfo.username,
+          userName: state.userInfo.userName,
         },
       };
 

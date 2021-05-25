@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { actionCreater } from "../store";
 import ToDoConponent from "../Components/ToDoComponent";
 
-const Todo = ({ toDos, addToDo }) => {
+const Todo = ({ toDos, addToDo, state }) => {
+  console.log(toDos, state);
   const [text, setText] = useState("");
   const onChange = e => {
     setText(e.target.value);
@@ -18,7 +19,13 @@ const Todo = ({ toDos, addToDo }) => {
       <button onClick={onSubmit}>제출</button>
       <ul>
         {toDos.map(current => {
-          return <ToDoConponent key={current.id} {...current} />;
+          return (
+            <ToDoConponent
+              key={current.id}
+              text={current.text}
+              name={current.name}
+            />
+          );
         })}
       </ul>
     </div>
@@ -26,7 +33,7 @@ const Todo = ({ toDos, addToDo }) => {
 };
 
 const mapStateToProps = state => {
-  return { toDos: state.todo };
+  return { toDos: state.todo, state };
 };
 
 const mapDispatchToProps = dispatch => {
